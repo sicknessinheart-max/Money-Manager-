@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Money Manager</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root { 
+      --bg: #ffffff; 
+      --surface: #f8f9fa; 
+      --text: #1a1a1a; 
+      --text-light: #6b7280; 
+      --border: #e5e7eb; 
+      --primary: #3b82f6;
+      --success: #10b981;
+      --danger: #ef4444;
+      --warning: #f59e0b;
+    }
+    
+    @media (prefers-color-scheme: dark) {
+      :root { 
+        --bg: #000000; 
+        --surface: #1f2937; 
+        --text: #ffffff; 
+        --text-light: #9ca3af; 
+        --border: #374151; 
+      }
+    }
+    
+    body { 
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+    }
+
+    * { 
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    @keyframes slide-up {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+    .animate-slide-up {
+      animation: slide-up 0.3s ease-out;
+    }
+  </style>
+<script type="importmap">
+{
+  "imports": {
+    "react": "https://aistudiocdn.com/react@^19.2.0",
+    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.0/",
+    "react/": "https://aistudiocdn.com/react@^19.2.0/",
+    "firebase/": "https://aistudiocdn.com/firebase@^12.4.0/"
+  }
+}
+</script>
+</head>
+<body class="antialiased">
+  <div id="root" class="h-screen w-screen overflow-hidden"></div>
+  <script type="module" src="/index.tsx"></script>
+</body>
+</html>

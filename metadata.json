@@ -1,0 +1,5 @@
+{
+  "name": "Money Manager with AI Insights",
+  "description": "A sleek and modern personal finance tracker that helps you manage your income and expenses. It features AI-powered insights to detect spending patterns, identify anomalies, and provide smart recommendations to improve your financial health. The app also includes tools like a bill splitter and financial notes, all wrapped in a clean, mobile-first interface.",
+  "requestFramePermissions": []
+}
