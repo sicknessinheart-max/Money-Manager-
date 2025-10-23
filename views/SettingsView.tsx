@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { UserCategory, UserCategories } from '../types';
 import { BASE_CATEGORIES } from '../constants';
@@ -6,14 +5,16 @@ import { BASE_CATEGORIES } from '../constants';
 interface SettingsViewProps {
     userCategories: UserCategories;
     currency: string;
+    theme: 'light' | 'dark';
     onUpdateCurrency: (currency: string) => void;
     onOpenCategoryModal: (mode: 'add' | 'edit', category?: UserCategory) => void;
     onDeleteCategory: (id: string) => void;
     onBack: () => void;
+    onToggleTheme: () => void;
 }
 
 const SettingsView: React.FC<SettingsViewProps> = ({ 
-    userCategories, currency, onUpdateCurrency, onOpenCategoryModal, onDeleteCategory, onBack 
+    userCategories, currency, onUpdateCurrency, onOpenCategoryModal, onDeleteCategory, onBack, theme, onToggleTheme 
 }) => {
     return (
         <div className="p-6">
@@ -45,7 +46,7 @@ const SettingsView: React.FC<SettingsViewProps> = ({
                 </button>
             </div>
 
-            <div className="bg-[var(--surface)] rounded-2xl p-4">
+            <div className="bg-[var(--surface)] rounded-2xl p-4 mb-4">
                  <h3 className="text-lg font-semibold px-2 mb-2">General</h3>
                 <div className="flex justify-between items-center p-2">
                     <p>Currency</p>
@@ -61,6 +62,28 @@ const SettingsView: React.FC<SettingsViewProps> = ({
                         <option value="CAD">CAD</option>
                         <option value="AUD">AUD</option>
                     </select>
+                </div>
+            </div>
+
+            <div className="bg-[var(--surface)] rounded-2xl p-4">
+                 <h3 className="text-lg font-semibold px-2 mb-2">Appearance</h3>
+                <div className="flex justify-between items-center p-2">
+                    <p>Dark Mode</p>
+                    <button
+                        onClick={onToggleTheme}
+                        className={`w-12 h-6 rounded-full p-1 flex items-center transition-colors duration-300 ${
+                            theme === 'dark' ? 'bg-blue-500' : 'bg-gray-300 dark:bg-gray-700'
+                        }`}
+                        role="switch"
+                        aria-checked={theme === 'dark'}
+                    >
+                        <span className="sr-only">Toggle dark mode</span>
+                        <span
+                            className={`w-4 h-4 bg-white rounded-full shadow-md transform transition-transform duration-300 ${
+                                theme === 'dark' ? 'translate-x-6' : 'translate-x-0'
+                            }`}
+                        />
+                    </button>
                 </div>
             </div>
         </div>

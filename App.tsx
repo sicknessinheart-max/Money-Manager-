@@ -1,7 +1,6 @@
-
-import React, { useState, useCallback, useMemo } from 'react';
+import React, { useState, useCallback, useMemo, useEffect } from 'react';
 import { View, ModalType, Transaction, Category } from './types';
-import { useFirebase } from './hooks/useFirebase';
+import { useFirebase } from './components/useFirebase';
 import DashboardView from './views/DashboardView';
 import TransactionsView from './views/TransactionsView';
 import InsightsView from './views/InsightsView';
@@ -19,6 +18,27 @@ const App: React.FC = () => {
     const [currentView, setCurrentView] = useState<View>('dashboard');
     const [activeModal, setActiveModal] = useState<ModalType | null>(null);
     const [modalProps, setModalProps] = useState<any>({});
+    const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            return savedTheme as 'light' | 'dark';
+        }
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    });
+
+    useEffect(() => {
+        if (theme === 'dark') {
+            document.documentElement.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem('theme', 'light');
+        }
+    }, [theme]);
+
+    const toggleTheme = useCallback(() => {
+        setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
+    }, []);
 
     const {
         transactions,
@@ -66,6 +86,8 @@ const App: React.FC = () => {
                     onOpenCategoryModal={(mode, category) => openModal('categoryEditor', { mode, category })}
                     onDeleteCategory={deleteCategory}
                     onBack={() => setCurrentView('dashboard')}
+                    theme={theme}
+                    onToggleTheme={toggleTheme}
                 />;
             case 'profile':
                  return <ProfileView />;
